@@ -11,15 +11,15 @@
     - role: mullholland.docker
     - role: mullholland.repository_epel
     - role: mullholland.pip
-      when: not ((ansible_distribution == "Debian" and ansible_distribution_major_version | int >= 13) or
+      when: not ((ansible_distribution == "Debian" and ansible_distribution_major_version | int >= 12) or
                  (ansible_distribution == "Ubuntu" and ansible_distribution_major_version | int >= 24))
 
   tasks:
-    - name: Install python3-docker on Debian 13+ / Ubuntu 24.04+
+    - name: Install python3-docker on Debian 12+ / Ubuntu 24.04+
       ansible.builtin.apt:
         name: python3-docker
         state: present
-      when: (ansible_distribution == "Debian" and ansible_distribution_major_version | int >= 13) or
+      when: (ansible_distribution == "Debian" and ansible_distribution_major_version | int >= 12) or
             (ansible_distribution == "Ubuntu" and ansible_distribution_major_version | int >= 24)
 
     # mullholland.pip only installs the pip binary itself, it no longer
@@ -30,5 +30,5 @@
       ansible.builtin.pip:
         name: "{{ pip_packages }}"
         state: present
-      when: not ((ansible_distribution == "Debian" and ansible_distribution_major_version | int >= 13) or
+      when: not ((ansible_distribution == "Debian" and ansible_distribution_major_version | int >= 12) or
                  (ansible_distribution == "Ubuntu" and ansible_distribution_major_version | int >= 24))
