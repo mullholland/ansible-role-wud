@@ -1,0 +1,8 @@
+---
+#
+# Ansible managed
+#
+repository:
+  description: Installs and configures WUD (What's Up Docker) container based on the official WUD docker image
+  homepage: https://mullholland.net
+  topics: cloud, development, docker, wud, monitoring, ansible, molecule, playbook

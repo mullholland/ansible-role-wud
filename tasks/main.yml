@@ -1,0 +1,16 @@
+---
+- name: Validate input variables
+  ansible.builtin.include_tasks:
+    file: assert.yml
+
+- name: Create user
+  ansible.builtin.include_tasks:
+    file: user.yml
+
+- name: Create docker network
+  ansible.builtin.include_tasks:
+    file: docker.yml
+
+- name: Prepare wud
+  ansible.builtin.include_tasks:
+    file: wud.yml

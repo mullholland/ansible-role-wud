@@ -1,0 +1,56 @@
+---
+argument_specs:
+  main:
+    short_description: Installs and configures WUD (What's Up Docker)
+    description: >
+      Deploy WUD as a systemd-managed Docker Compose service.
+    options:
+      wud_docker_network_name:
+        type: str
+        default: web
+        description: Name of the external Docker network to attach WUD to.
+      wud_docker_base_path:
+        type: str
+        default: /opt
+        description: Base directory where WUD application files are stored.
+      wud_docker_timezone:
+        type: str
+        default: Europe/Berlin
+        description: Timezone for the WUD container.
+      wud_docker_user:
+        type: str
+        default: homelab
+        description: System user that owns WUD files.
+      wud_docker_uid:
+        type: str
+        default: "900"
+        description: UID of the WUD system user.
+      wud_docker_group:
+        type: str
+        default: homelab
+        description: System group that owns WUD files.
+      wud_docker_gid:
+        type: str
+        default: "900"
+        description: GID of the WUD system group.
+      wud_docker_user_system:
+        type: bool
+        default: true
+        description: Whether the WUD user is a system account.
+      wud_docker_version:
+        type: str
+        default: getwud/wud:latest
+        description: Docker image and tag to deploy.
+      wud_docker_environment_variables:
+        type: list
+        elements: str
+        default: []
+        description: Environment variable definitions passed to the container (key:value strings).
+      wud_docker_ports:
+        type: list
+        elements: str
+        description: Port mappings to expose on the host.
+      wud_docker_labels:
+        type: list
+        elements: str
+        description: Docker labels applied to the WUD container.

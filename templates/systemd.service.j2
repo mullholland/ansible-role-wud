@@ -1,0 +1,28 @@
+{{ ansible_managed | comment }}
+[Unit]
+Description={{ app_name }} service with docker compose
+Requires=docker.service network-online.target
+After=docker.service network-online.target
+
+[Service]
+Type=simple
+TimeoutStartSec=15min
+Restart=always
+
+RemainAfterExit=true
+WorkingDirectory=/opt/{{ app_name }}
+
+# Start
+ExecStartPre={{ wud_docker_executable_path.stdout }} compose pull --quiet --ignore-pull-failures
+ExecStartPre={{ wud_docker_executable_path.stdout }} compose build --pull
+ExecStart={{ wud_docker_executable_path.stdout }} compose up -d --remove-orphans
+
+# Stop
+ExecStop={{ wud_docker_executable_path.stdout }} compose down --remove-orphans
+
+# Reload
+ExecReload={{ wud_docker_executable_path.stdout }} compose pull --quiet --ignore-pull-failures
+ExecReload={{ wud_docker_executable_path.stdout }} compose build --pull
+
+[Install]
+WantedBy=multi-user.target

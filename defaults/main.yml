@@ -1,0 +1,35 @@
+---
+# General config
+wud_docker_network_name: "web"
+wud_docker_base_path: "/opt"
+wud_docker_timezone: "Europe/Berlin"
+
+# User/Group of the stack. Everything is mapped to this, instead of root.
+wud_docker_user: "homelab"
+wud_docker_uid: "900"
+wud_docker_group: "homelab"
+wud_docker_gid: "900"
+wud_docker_user_system: true
+
+# which container version to install
+# can also be latest
+wud_docker_version: "getwud/wud:latest"
+
+# additional docker compose environment variables
+# https://getwud.github.io/wud/#/configuration/
+wud_docker_environment_variables:
+  - "WUD_WATCHER_LOCAL_CRON: '0 * * * *'"       # check every hour for image updates
+  # - "WUD_WATCHER_LOCAL_WATCHBYDEFAULT: false"  # only watch containers with wud.watch=true label, else watch all
+  # WUD - Notifications (Triggers)
+  # - "WUD_TRIGGER_DISCORD_MYDISCORD_TYPE: discord"
+  # - "WUD_TRIGGER_DISCORD_MYDISCORD_URL: discord://token@channel"
+  # web ui - basic auth
+  # - "WUD_AUTH_BASIC_MYUSER_USER: admin"
+  # - "WUD_AUTH_BASIC_MYUSER_HASH: $$apr1$$..."  # htpasswd hash
+
+# which port to expose. disabled by default — exposing the web UI without auth is a security risk
+# enable basic auth via WUD_AUTH_BASIC_* before uncommenting
+wud_docker_ports: []
+#  - "3000:3000"
+wud_docker_labels:
+  - "traefik.enable=false"

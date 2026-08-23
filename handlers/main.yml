@@ -1,0 +1,10 @@
+---
+- name: Wud systemd reload
+  ansible.builtin.systemd:
+    daemon_reload: true
+
+- name: Wud restart
+  ansible.builtin.service:
+    name: "wud"
+    state: restarted
+    enabled: true

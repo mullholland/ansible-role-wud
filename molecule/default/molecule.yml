@@ -1,0 +1,28 @@
+---
+#
+# Ansible managed
+#
+dependency:
+  name: galaxy
+  options:
+    role-file: requirements.yml
+    requirements-file: requirements.yml
+lint: |
+  set -e
+  yamllint .
+  ansible-lint
+driver:
+  name: docker
+platforms:
+  - name: "wud-${image:-debian}-${tag:-latest}"
+    image: "${namespace:-mullholland}/docker-${image:-debian}-systemd:${tag:-latest}"
+    command: /sbin/init
+    cgroupns_mode: host
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+    privileged: yes
+    pre_build_image: yes
+provisioner:
+  name: ansible
+verifier:
+  name: ansible

@@ -1,0 +1,5 @@
+---
+roles:
+  - name: mullholland.repository_epel
+  - name: mullholland.docker
+  - name: mullholland.pip

@@ -1,0 +1,32 @@
+---
+galaxy_info:
+  author: mullholland
+  namespace: mullholland
+  role_name: wud
+  description: Installs and configures WUD (What's Up Docker) container based on the official WUD docker image
+  license: MIT
+  company: none
+  min_ansible_version: "2.10"
+
+  platforms:
+    - name: EL
+      versions:
+        - all
+    - name: Fedora
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - all
+
+  galaxy_tags:
+    - cloud
+    - development
+    - docker
+    - wud
+    - monitoring
+
+dependencies: []
