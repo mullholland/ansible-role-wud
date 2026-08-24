@@ -1,3 +1,13 @@
 ---
 custom_message: |
   See the [official WUD website](https://getwud.github.io/wud/) for more information about WUD itself (configuration reference, watchers, triggers).
+
+# CentOS Stream has no dedicated entry in Ansible Galaxy's meta/main.yml
+# platform schema (only the generic "EL" umbrella covers RHEL clones), but
+# this role has no distro-specific logic and works the same across the whole
+# RHEL family. Add it to the CI matrix / README compatibility table via this
+# generator extension point instead, without violating the Galaxy meta schema.
+extra_platforms:
+  - name: CentOS
+    versions:
+      - all
