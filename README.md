@@ -56,6 +56,26 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
         state: present
       when: not ((ansible_distribution == "Debian" and ansible_distribution_major_version | int >= 12) or
                  (ansible_distribution == "Ubuntu" and ansible_distribution_major_version | int >= 24))
+
+    # Nested overlay2-on-overlay2 mounts can fail on some container backends
+    # (e.g. OrbStack, some CI runners): "failed to mount ...: fstype: overlay
+    # ... invalid argument". vfs avoids that at the cost of slower image
+    # pulls, which is an acceptable trade-off for a molecule test instance.
+    - name: Configure inner dockerd to use the vfs storage driver
+      ansible.builtin.copy:
+        dest: /etc/docker/daemon.json
+        content: |
+          {
+            "storage-driver": "vfs"
+          }
+        mode: "0644"
+      notify: restart docker
+
+  handlers:
+    - name: restart docker
+      ansible.builtin.systemd:
+        name: docker
+        state: restarted
 ```
 
 See the [official WUD website](https://getwud.github.io/wud/) for more information about WUD itself (configuration reference, watchers, triggers).

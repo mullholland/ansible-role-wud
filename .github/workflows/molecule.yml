@@ -11,7 +11,7 @@ on:
       - '*'
   pull_request:
     branches:
-      - master
+      - main
   schedule:
     - cron: '45 22 23 * *'
 
@@ -37,14 +37,12 @@ jobs:
             tag: "9"
           - image: "redhat"
             tag: "10"
-          - image: "fedora"
-            tag: "42"
+          - image: "ubuntu"
+            tag: "resolute"
           - image: "ubuntu"
             tag: "noble"
           - image: "ubuntu"
             tag: "jammy"
-          - image: "debian"
-            tag: "bookworm"
           - image: "debian"
             tag: "trixie"
     steps:
