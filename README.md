@@ -27,7 +27,7 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
   gather_facts: true
   vars:
     pip_packages:
-      - "docker"
+      - "docker>=7.1.0"
 
   roles:
     - role: mullholland.docker
@@ -44,10 +44,6 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
       when: (ansible_distribution == "Debian" and ansible_distribution_major_version | int >= 12) or
             (ansible_distribution == "Ubuntu" and ansible_distribution_major_version | int >= 24)
 
-    # mullholland.pip only installs the pip binary itself, it no longer
-    # installs pip packages (removed due to PEP 668), so the
-    # community.docker modules used below need their Python dependency
-    # installed here directly on every other distribution.
     - name: Install python dependencies for community.docker modules
       ansible.builtin.pip:
         name: "{{ pip_packages }}"
