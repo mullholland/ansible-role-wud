@@ -12,6 +12,10 @@ services:
     hostname: "{{ app_name }}"
     init: true
     restart: always
+{% if wud_docker_logging %}
+    logging:
+      {{ wud_docker_logging | to_nice_yaml(indent=2) | indent(6) | trim }}
+{% endif %}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
